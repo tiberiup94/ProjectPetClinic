@@ -2,8 +2,11 @@ package org.example.clinic;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table (name = "pets")
+@Table (name = "pet")
 public class Pet {
 
     @Id
@@ -15,15 +18,25 @@ public class Pet {
     private String name;
     private int age;
     private double weight;
-    private Integer ownerId;
+    // private Integer ownerId;
 
-    public Pet(String species, String breed, String name, int age, double weight, Integer ownerId) {
+    @ManyToOne
+    @JoinColumn (name = "owner_id")
+    private Owner owner;
+
+
+    @OneToMany(mappedBy = "pet")
+    private Set<Appointment> appointments = new HashSet<>();
+
+
+    public Pet(String species, String breed, String name, int age, double weight, Owner owner, Set<Appointment> appointments) {
         this.species = species;
         this.breed = breed;
         this.name = name;
         this.age = age;
         this.weight = weight;
-        this.ownerId = ownerId;
+        this.owner = owner;
+        this.appointments = appointments;
     }
 
     public Pet(){
@@ -76,11 +89,19 @@ public class Pet {
         this.weight = weight;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public Set<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(Set<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

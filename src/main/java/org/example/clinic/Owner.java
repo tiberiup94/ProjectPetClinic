@@ -3,8 +3,11 @@ package org.example.clinic;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name =  "owners")
+@Table(name =  "owner")
 public class Owner {
 
     @Id
@@ -17,12 +20,18 @@ public class Owner {
     private String address;
 
 
-    public Owner(String name, String phone, String mail, String address) {
+    @OneToMany(mappedBy = "owner")
+    private Set<Pet> pets = new HashSet<>();
+
+    public Owner(String name, String phone, String mail, String address, Set<Pet> pets) {
         this.name = name;
         this.phone = phone;
         this.mail = mail;
         this.address = address;
+        this.pets = pets;
     }
+
+
 
     public Owner() {
     }
@@ -63,4 +72,13 @@ public class Owner {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Set<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
+
 }
