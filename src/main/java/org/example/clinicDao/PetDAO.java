@@ -5,7 +5,9 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.clinic.Pet;
 
-public class PetDAO {
+import java.util.List;
+
+public class PetDAO extends EntityDAO<Pet>{
 
 
     private EntityManagerFactory entityManagerFactory;
@@ -55,7 +57,7 @@ public class PetDAO {
         try{
 
             entityManager.getTransaction().begin();
-            entityManager.persist(pet);
+            entityManager.merge(pet);
             entityManager.getTransaction().commit();
 
         } catch (Exception e){
@@ -65,12 +67,13 @@ public class PetDAO {
             }
             e.printStackTrace();
         } finally {
-            if (entityManager.isOpen()) {
+
                 entityManager.close();
-            }
+
         }
 
     }
+
 
 
 
