@@ -9,10 +9,10 @@ import org.example.clinic.Pet;
 public class OwnerDAO extends EntityDAO<Owner> {
 
 
-    private EntityManagerFactory entityManagerFactory;
+
 
     public OwnerDAO(){
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistanceUnitName");
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
     }
 
 

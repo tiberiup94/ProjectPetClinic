@@ -8,7 +8,7 @@ import org.hibernate.cfg.Configuration;
 
 public class VeterinaryDAO extends SessionDAO<Veterinary>{
 
-    private SessionFactory sessionFactory;
+//    private SessionFactory sessionFactory;
 
 
     public VeterinaryDAO(){

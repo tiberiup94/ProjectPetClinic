@@ -7,17 +7,17 @@ import org.example.clinic.Pet;
 
 import java.util.List;
 
-public class EntityDAO<T>{
-    private EntityManagerFactory entityManagerFactory;
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+public abstract class EntityDAO<T>{
+    protected EntityManagerFactory entityManagerFactory;
 
+    protected T entity;
 
     public EntityDAO(){
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistanceUnitName");
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
     }
 
     public void delete(T t){
-
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         try{
 
@@ -40,11 +40,14 @@ public class EntityDAO<T>{
 
     }
 
-    public List<T> displayAll(String entityName){
 
 
+    public List<T> displayAll(){
 
-        String hql = "FROM " + entityName;
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        String name = this.entity.getClass().getSimpleName();
+        String hql = "FROM " + name;
         List<T> list = entityManager.createQuery(hql).getResultList();
         entityManager.getTransaction().commit();
         entityManager.close();

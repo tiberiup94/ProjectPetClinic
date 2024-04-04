@@ -11,7 +11,7 @@ public class AppointmentDAO extends SessionDAO<Appointment> {
 
 
 
-    private SessionFactory sessionFactory;
+//    private SessionFactory sessionFactory;
 
 
     public AppointmentDAO(){

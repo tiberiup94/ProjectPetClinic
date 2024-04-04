@@ -104,4 +104,20 @@ public class Pet {
     public void setAppointments(Set<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Pet{");
+        sb.append("idPet=").append(idPet);
+        sb.append(", species='").append(species).append('\'');
+        sb.append(", breed='").append(breed).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(", weight=").append(weight);
+        sb.append(", owner=").append(owner);
+        sb.append(", appointments=").append(appointments);
+        sb.append('}');
+        return sb.toString();
+    }
 }

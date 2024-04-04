@@ -10,5 +10,12 @@
         <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
+        <mapping class="org.example.clinic.Appointment"/>
+        <mapping class="org.example.clinic.Veterinary"/>
+        <mapping class="org.example.clinic.Owner"/>
+        <mapping class="org.example.clinic.Pet"/>
+
+
+
     </session-factory>
 </hibernate-configuration>

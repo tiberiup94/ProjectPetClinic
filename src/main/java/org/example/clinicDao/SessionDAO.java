@@ -7,9 +7,9 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
-public class SessionDAO<T> {
+public abstract class SessionDAO<T> {
 
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
 
     public SessionDAO(){

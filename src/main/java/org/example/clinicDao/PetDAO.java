@@ -10,13 +10,10 @@ import java.util.List;
 public class PetDAO extends EntityDAO<Pet>{
 
 
-    private EntityManagerFactory entityManagerFactory;
-
-
     public PetDAO(){
 
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistanceUnitName");
-
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
+        super.entity = new Pet();
     }
 
     public void createPet(Pet pet){
