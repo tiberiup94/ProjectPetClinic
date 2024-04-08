@@ -35,7 +35,6 @@ import org.example.clinic.Pet;
 import org.example.clinic.Veterinary;
 import org.example.clinicDao.*;
 
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -43,14 +42,16 @@ import java.util.*;
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
+
+    static AppointmentDAO appointmentDAO = new AppointmentDAO();
+    static OwnerDAO ownerDAO = new OwnerDAO();
+    static PetDAO petDAO = new PetDAO();
+    static VeterinaryDAO veterinaryDAO = new VeterinaryDAO();
     public static void main(String[] args) {
 
 
 
-        AppointmentDAO appointmentDAO = new AppointmentDAO();
-        OwnerDAO ownerDAO = new OwnerDAO();
-        PetDAO petDAO = new PetDAO();
-        VeterinaryDAO veterinaryDAO = new VeterinaryDAO();
+
 
 
 //        Owner owner1 = new Owner("Marcel", "0722222222", "marcel@yahoo.com", "Bucuresti 30", new HashSet<>());
@@ -93,6 +94,7 @@ public class Main {
         System.out.println("B - Adauga un veterinar");
         System.out.println("C - Adauga un owner");
         System.out.println("D - Pune o programare");
+        System.out.println("E - Arata Animalele din baza de date");
 
 
         while (true) {
@@ -106,7 +108,27 @@ public class Main {
 
             switch (start.toLowerCase()) {
 
-                case "A":
+                    case "a":
+                    adaugaPet();
+                    break;
+
+                    case "b":
+                    adaugaVet();
+                    break;
+
+                    case "c":
+                    adaugaApp();
+                    break;
+
+                    case "d":
+                    adaugaStapan();
+                    break;
+
+                    case "e":
+                        arataAnimale();
+                        break;
+                default :
+                        System.out.println("Comanda nu este in lista");
 
 
             }
@@ -115,20 +137,96 @@ public class Main {
         }
     }
 
-        public void adaugaPet () {
+       static public void adaugaPet () {
             String text;
             System.out.println("Introduceti detaliile Pet-ului: ");
-            System.out.println("Nume ");
-            text = scanner.nextLine();
-            System.out.println("Nume ");
-            text = scanner.nextLine();
-            System.out.println("Nume ");
-            text = scanner.nextLine();
-            System.out.println("Nume ");
-            text = scanner.nextLine();
+            System.out.println("Specie ");
+            String specie = scanner.nextLine();
+            System.out.println("Breed ");
+            String breed = scanner.nextLine();
+            System.out.println("Name ");
+            String name = scanner.nextLine();
+            System.out.println("Varsta ");
+            int varsta = scanner.nextInt();
+            System.out.println("Greutata ");
+            double greutate = scanner.nextDouble();
+            System.out.println("Id Stapan: ");
+            int id = scanner.nextInt();
+            Owner stapan = ownerDAO.readOwnerById(id);
+
+            Pet pet1 = new Pet(specie, breed, name, varsta, greutate, stapan, new HashSet<>());
+            petDAO.createPet(pet1);
 
         }
 
+    static public void adaugaVet () {
+        String text;
+        System.out.println("Introduceti detaliile Vet-ului: ");
+        System.out.println("Name ");
+        String name = scanner.nextLine();
+        System.out.println("Telefon ");
+        String telefon = scanner.nextLine();
+        System.out.println("Mail ");
+        String mail = scanner.nextLine();
+        System.out.println("Speciality ");
+        String specialitate = scanner.nextLine();
 
+
+        Veterinary vet1 = new Veterinary(name, telefon, mail, specialitate, new HashSet<>());
+        veterinaryDAO.createVeterinary(vet1);
+
+    }
+
+
+    static public void adaugaApp () {
+        String text;
+        System.out.println("Introduceti detaliile Programarii: ");
+        System.out.println("Id Pet ");
+        int idPet = scanner.nextInt();
+        Pet pet = petDAO.readPetById(idPet);
+        System.out.println("Id Vet ");
+        int idVet = scanner.nextInt();
+        Veterinary vet = veterinaryDAO.readVeterinary(idVet);
+        Date data = new Date();
+        System.out.println("Motiv ");
+        String motive = scanner.nextLine();
+
+
+        Appointment app1 = new Appointment(pet, vet, data, motive);
+        appointmentDAO.createAppointment(app1);
+
+    }
+
+    static public void adaugaStapan () {
+        String text;
+        System.out.println("Introduceti detaliile Stapanului: ");
+        System.out.println("Name ");
+        String name = scanner.nextLine();
+        System.out.println("Telefon ");
+        String telefon = scanner.nextLine();
+        System.out.println("Mail ");
+        String mail = scanner.nextLine();
+        System.out.println("Adresa ");
+        String adresa = scanner.nextLine();
+
+
+        Owner stapan = new Owner(name, telefon, mail, adresa, new HashSet<>());
+       ownerDAO.createOwner(stapan);
+
+    }
+
+    static public void arataAnimale(){
+
+
+        List<Pet> list = petDAO.displayAll();
+        for(Pet pet : list){
+            System.out.println( pet.toString());
+        }
+
+    }
 
 }
+
+
+
+///// stergere la toate si update

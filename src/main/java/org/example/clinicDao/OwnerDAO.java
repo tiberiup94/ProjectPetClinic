@@ -38,7 +38,7 @@ public class OwnerDAO extends EntityDAO<Owner> {
 
     }
 
-    public Owner readPetById( Integer ownerId ){
+    public Owner readOwnerById( Integer ownerId ){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             return entityManager.find(Owner.class, ownerId);

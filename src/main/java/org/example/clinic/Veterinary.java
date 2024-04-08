@@ -87,7 +87,7 @@ public class Veterinary {
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", mail='").append(mail).append('\'');
         sb.append(", speciality='").append(speciality).append('\'');
-        sb.append(", appointments=").append(appointments);
+      //  sb.append(", appointments=").append(appointments);
         sb.append('}');
         return sb.toString();
     }

@@ -115,8 +115,8 @@ public class Pet {
         sb.append(", name='").append(name).append('\'');
         sb.append(", age=").append(age);
         sb.append(", weight=").append(weight);
-        sb.append(", owner=").append(owner);
-        sb.append(", appointments=").append(appointments);
+       // sb.append(", owner=").append(owner);
+       // sb.append(", appointments=").append(appointments);
         sb.append('}');
         return sb.toString();
     }

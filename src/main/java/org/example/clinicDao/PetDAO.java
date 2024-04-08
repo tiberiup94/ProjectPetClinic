@@ -1,12 +1,7 @@
 package org.example.clinicDao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.example.clinic.Pet;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PetDAO extends EntityDAO<Pet>{
 
