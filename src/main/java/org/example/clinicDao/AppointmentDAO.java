@@ -14,9 +14,9 @@ public class AppointmentDAO extends SessionDAO<Appointment> {
 //    private SessionFactory sessionFactory;
 
 
-    public AppointmentDAO(){
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
-    }
+//    public AppointmentDAO(){
+//        this.sessionFactory = new Configuration().configure().buildSessionFactory();
+//    }
 
     public void createAppointment(Appointment appointment){
 

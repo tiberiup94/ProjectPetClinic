@@ -20,12 +20,12 @@ public class Pet {
     private double weight;
     // private Integer ownerId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn (name = "owner_id")
     private Owner owner;
 
 
-    @OneToMany(mappedBy = "pet")
+    @OneToMany(mappedBy = "pet", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<>();
 
 

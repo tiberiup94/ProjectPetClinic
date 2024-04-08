@@ -17,11 +17,11 @@ public class Appointment {
     private String reason;
 
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "pet_id")
     private  Pet pet;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "vet_id")
     private  Veterinary vet;
 
@@ -70,5 +70,17 @@ public class Appointment {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Appointment{");
+        sb.append("idApp=").append(idApp);
+        sb.append(", date=").append(date);
+        sb.append(", reason='").append(reason).append('\'');
+//        sb.append(", pet=").append(pet);
+//        sb.append(", vet=").append(vet);
+        sb.append('}');
+        return sb.toString();
     }
 }

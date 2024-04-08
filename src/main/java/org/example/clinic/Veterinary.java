@@ -19,7 +19,7 @@ public class Veterinary {
     private String mail;
     private String speciality;
 
-    @OneToMany(mappedBy = "vet")
+    @OneToMany(mappedBy = "vet", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
 
@@ -77,5 +77,18 @@ public class Veterinary {
 
     public void setAppointments(Set<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Veterinary{");
+        sb.append("idVet=").append(idVet);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", mail='").append(mail).append('\'');
+        sb.append(", speciality='").append(speciality).append('\'');
+        sb.append(", appointments=").append(appointments);
+        sb.append('}');
+        return sb.toString();
     }
 }

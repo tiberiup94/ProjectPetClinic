@@ -11,9 +11,9 @@ public class OwnerDAO extends EntityDAO<Owner> {
 
 
 
-    public OwnerDAO(){
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
-    }
+//    public OwnerDAO(){
+//        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
+//    }
 
 
     public void createOwner(Owner owner){

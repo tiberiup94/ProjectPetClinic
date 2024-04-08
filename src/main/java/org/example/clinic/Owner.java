@@ -81,4 +81,16 @@ public class Owner {
         this.pets = pets;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Owner{");
+        sb.append("idOwner=").append(idOwner);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", phone='").append(phone).append('\'');
+        sb.append(", mail='").append(mail).append('\'');
+        sb.append(", address='").append(address).append('\'');
+//        sb.append(", pets=").append(pets);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -10,10 +10,10 @@ public class VeterinaryDAO extends SessionDAO<Veterinary>{
 
 //    private SessionFactory sessionFactory;
 
-
-    public VeterinaryDAO(){
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
-    }
+//
+//    public VeterinaryDAO(){
+//        this.sessionFactory = new Configuration().configure().buildSessionFactory();
+//    }
 
     public void createVeterinary(Veterinary veterinary){
 

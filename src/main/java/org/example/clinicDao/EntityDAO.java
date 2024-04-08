@@ -5,12 +5,12 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.clinic.Pet;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class EntityDAO<T>{
     protected EntityManagerFactory entityManagerFactory;
 
-    protected T entity;
 
     public EntityDAO(){
         this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
@@ -40,16 +40,19 @@ public abstract class EntityDAO<T>{
 
     }
 
-
+    public String findEntityName() {
+        ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+        return ((Class) genericSuperclass.getActualTypeArguments()[0]).getSimpleName();
+    }
 
     public List<T> displayAll(){
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        String name = this.entity.getClass().getSimpleName();
+        String name = this.findEntityName();
         String hql = "FROM " + name;
         List<T> list = entityManager.createQuery(hql).getResultList();
-        entityManager.getTransaction().commit();
+//        entityManager.getTransaction().commit();
         entityManager.close();
         return list;
 

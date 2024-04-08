@@ -5,16 +5,16 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.example.clinic.Pet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PetDAO extends EntityDAO<Pet>{
 
 
-    public PetDAO(){
-
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
-        super.entity = new Pet();
-    }
+//    public PetDAO(){
+//        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
+//
+//    }
 
     public void createPet(Pet pet){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -71,6 +71,20 @@ public class PetDAO extends EntityDAO<Pet>{
 
     }
 
+
+//    @Override
+//    public List<Pet> displayAll(){
+////        List<Pet> pets = new ArrayList<>();
+////        pets = super.displayAll();
+////        OwnerDAO ownerDAO = new OwnerDAO();
+////        for(Pet pet: pets) {
+////            pet.setOwner(ownerDAO.findOwnerByPetId(pet.getIdPet()));
+////            pet.setAppointments(app.);
+////        }
+//
+//
+//
+//    }
 
 
 

@@ -36,47 +36,99 @@ import org.example.clinic.Veterinary;
 import org.example.clinicDao.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+
 
 public class Main {
+
+    static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
-        AppointmentDAO appointmentDAO =new AppointmentDAO();
+
+
+        AppointmentDAO appointmentDAO = new AppointmentDAO();
         OwnerDAO ownerDAO = new OwnerDAO();
         PetDAO petDAO = new PetDAO();
         VeterinaryDAO veterinaryDAO = new VeterinaryDAO();
 
 
-        Owner owner1 = new Owner("Marcel", "0722222222", "marcel@yahoo.com", "Bucuresti 30", new HashSet<>());
-      //  ownerDAO.createOwner(owner1);
-        System.out.println(owner1.getName() + " " + owner1.getPets());
+//        Owner owner1 = new Owner("Marcel", "0722222222", "marcel@yahoo.com", "Bucuresti 30", new HashSet<>());
+//      //  ownerDAO.createOwner(owner1);
+//        System.out.println(owner1.getName() + " " + owner1.getPets());
+//
+//        Pet pet1 = new Pet("Dog", "Husky", "Bruno", 4, 30.5, owner1, new HashSet<>());
+//       // petDAO.createPet(pet1);
+//        System.out.println(pet1.getName() + " Il are stapan pe  " + pet1.getOwner().getName());
+//
+//        Veterinary vet1 = new Veterinary("Marcu", "0733333333", "marcu@yahoo.com", "cainolog", new HashSet<>());
+//      ///  veterinaryDAO.createVeterinary(vet1);
+//        System.out.println(vet1.getName() + " ");
+//
+//
+//
+////        Appointment app1 = new Appointment(petDAO.readPetById(2),veterinaryDAO.readVeterinary(2), new Date(),"Bolnav");
+//       // appointmentDAO.createAppointment(app1);
+////        System.out.println(" vine " + app1.getPet() + " la control la " + " " + app1.getVet() + " la data de "+ app1.getDate());
+//
+////        petDAO.delete(petDAO.readPetById(1));
+//
+////          Pet petUpdate = petDAO.readPetById(2);
+// //         petUpdate.setName("Lara");
+////          petDAO.updatePet(petUpdate);
+//
+//
+//        System.out.println("afisam peturile ");
+//        List<Pet> list = petDAO.displayAll();
+//        for(Pet pet : list){
+//            System.out.println( pet.toString());
+//        }
 
-        Pet pet1 = new Pet("Dog", "Husky", "Bruno", 4, 30.5, owner1, new HashSet<>());
-       // petDAO.createPet(pet1);
-        System.out.println(pet1.getName() + " Il are stapan pe  " + pet1.getOwner().getName());
 
-        Veterinary vet1 = new Veterinary("Marcu", "0733333333", "marcu@yahoo.com", "cainolog", new HashSet<>());
-      ///  veterinaryDAO.createVeterinary(vet1);
-        System.out.println(vet1.getName() + " ");
+        System.out.println("Start programm...");
+        String start;
+
+        System.out.println("Alegeti litera pentru optiunea dorita :");
+        System.out.println("A - Adauga un pet");
+        System.out.println("B - Adauga un veterinar");
+        System.out.println("C - Adauga un owner");
+        System.out.println("D - Pune o programare");
 
 
+        while (true) {
 
-        Appointment app1 = new Appointment(petDAO.readPetById(2),veterinaryDAO.readVeterinary(2), new Date(),"Bolnav");
-       // appointmentDAO.createAppointment(app1);
-        System.out.println(" vine " + app1.getPet() + " la control la " + " " + app1.getVet() + " la data de "+ app1.getDate());
+            start = scanner.nextLine();
 
-//        petDAO.delete(petDAO.readPetById(1));
+            if ("exit".equals(start)) {
+                break;
+            }
 
-          Pet petUpdate = petDAO.readPetById(2);
- //         petUpdate.setName("Lara");
-          petDAO.updatePet(petUpdate);
 
-        List<Pet> listPet = petDAO.displayAll();
-        for(Pet pet :  listPet) {
-            System.out.println(pet.getName());
+            switch (start.toLowerCase()) {
+
+                case "A":
+
+
+            }
+
+
         }
     }
+
+        public void adaugaPet () {
+            String text;
+            System.out.println("Introduceti detaliile Pet-ului: ");
+            System.out.println("Nume ");
+            text = scanner.nextLine();
+            System.out.println("Nume ");
+            text = scanner.nextLine();
+            System.out.println("Nume ");
+            text = scanner.nextLine();
+            System.out.println("Nume ");
+            text = scanner.nextLine();
+
+        }
+
+
+
 }
