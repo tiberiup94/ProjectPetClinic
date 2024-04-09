@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class SessionDAO<T> {
@@ -33,17 +34,21 @@ public abstract class SessionDAO<T> {
         }
     }
 
-    public List<T> displayAll(String entity) {
 
+    public String findEntityName() {
+        ParameterizedType genericSuperclass = (ParameterizedType) this.getClass().getGenericSuperclass();
+        return ((Class) genericSuperclass.getActualTypeArguments()[0]).getSimpleName();
+    }
+    public List<T> displayAll() {
         Transaction tx = null;
         Session session = sessionFactory.openSession();
         List<T> list = null;
         try {
             tx = session.beginTransaction();
-            String hql = "FROM " + entity;
+            String entityName = this.findEntityName();
+            String hql = "FROM " + entityName;
             list = session.createQuery(hql).getResultList();
             tx.commit();
-
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
@@ -53,6 +58,7 @@ public abstract class SessionDAO<T> {
             session.close();
         }
         return list;
+
     }
 
 

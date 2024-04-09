@@ -6,14 +6,9 @@ import jakarta.persistence.Persistence;
 import org.example.clinic.Owner;
 import org.example.clinic.Pet;
 
+import java.util.List;
+
 public class OwnerDAO extends EntityDAO<Owner> {
-
-
-
-
-//    public OwnerDAO(){
-//        this.entityManagerFactory = Persistence.createEntityManagerFactory("yourPersistenceUnitName");
-//    }
 
 
     public void createOwner(Owner owner){
@@ -71,6 +66,19 @@ public class OwnerDAO extends EntityDAO<Owner> {
 
     }
 
+
+    public List<Owner> displayOwnerByPhone(String phone){
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        String hql = "FROM Owner WHERE phone = '" + phone + "'";
+        List<Owner> list = entityManager.createQuery(hql).getResultList();
+//      entityManager.getTransaction().commit();
+        entityManager.close();
+        return list;
+
+
+    }
 
 
 }

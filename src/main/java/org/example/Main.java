@@ -1,232 +1,248 @@
 package org.example;
 
-
-
-//Pet Clinic
-//
-//        Description:
-//
-//        Implemented the Pet Clinic application model using Hibernate ORM framework to facilitate object-relational mapping.
-//        Configured Hibernate annotations to define entity classes representing pets, owners, veterinarians and appointments.
-//        Established mappings between entities and corresponding database tables to ensure data persistence.
-//        Integrated Hibernate with a SQL database, leveraging MySQL for storing pet clinic data.
-//        Implemented CRUD operations for managing pets, owners, veterinarians and appointments, ensuring seamless interaction between the application and the database.
-//        Tested the functionality thoroughly to ensure proper data retrieval, storage, and manipulation.
-//        Refactored code for improved readability, maintainability, and performance.
-//        Resolved compatibility issues and optimized database queries for efficient data retrieval.
-//        Updated documentation to reflect changes and provide comprehensive information on project structure and implementation details.
-//
-//
-//        Welcome to the Pet-Clinic!
-//        Please chose one of the following options:
-//        0 - End session
-//        1 - Register a veterinary
-//        2 - Display all veterinaries
-//        3 - Register a pet owner
-//        4 - Display all pet owners
-//        5 - Register a pet
-//        6 - Display all pet
-//        7 - Add an appointment
-
-
 import org.example.clinic.Appointment;
 import org.example.clinic.Owner;
 import org.example.clinic.Pet;
 import org.example.clinic.Veterinary;
 import org.example.clinicDao.*;
 
-import java.util.*;
 
-
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static AppointmentDAO appointmentDAO = new AppointmentDAO();
+    static  AppointmentDAO appointmentDAO = new AppointmentDAO();
     static OwnerDAO ownerDAO = new OwnerDAO();
     static PetDAO petDAO = new PetDAO();
     static VeterinaryDAO veterinaryDAO = new VeterinaryDAO();
     public static void main(String[] args) {
 
-
-
-
-
-
-//        Owner owner1 = new Owner("Marcel", "0722222222", "marcel@yahoo.com", "Bucuresti 30", new HashSet<>());
-//      //  ownerDAO.createOwner(owner1);
+//        AppointmentDAO appointmentDAO = new AppointmentDAO();
+//        OwnerDAO ownerDAO = new OwnerDAO();
+//        PetDAO petDAO = new PetDAO();
+//        VeterinaryDAO veterinaryDAO = new VeterinaryDAO();
+//
+//        Owner owner1 = new Owner("Marcel", "0722222222", "marcel@yahoo.com", "Bucuresti, nr 30", null);
+//        //ownerDAO.createOwner(owner1);
 //        System.out.println(owner1.getName() + " " + owner1.getPets());
 //
 //        Pet pet1 = new Pet("Dog", "Husky", "Bruno", 4, 30.5, owner1, new HashSet<>());
-//       // petDAO.createPet(pet1);
-//        System.out.println(pet1.getName() + " Il are stapan pe  " + pet1.getOwner().getName());
+//        //petDAO.createPet(pet1);
+//        System.out.println(pet1.getName() + " with its owner " + pet1.getOwner().getName());
 //
-//        Veterinary vet1 = new Veterinary("Marcu", "0733333333", "marcu@yahoo.com", "cainolog", new HashSet<>());
-//      ///  veterinaryDAO.createVeterinary(vet1);
-//        System.out.println(vet1.getName() + " ");
+//        Veterinary vet1 = new Veterinary("Dr. Ion", "073333333", "drion@gmail.com", "surgeon", new HashSet<>());
+//        //veterinaryDAO.createVeterinary(vet1);
+//        System.out.println(vet1.getName());
 //
+//        Appointment app1 = new Appointment(pet1, vet1, new Date(), "vaccines");
+//        //appointmentDAO.createAppointment(app1);
+//        System.out.println("_");
 //
+//        //petDAO.delete(petDAO.readPet(1));
 //
-////        Appointment app1 = new Appointment(petDAO.readPetById(2),veterinaryDAO.readVeterinary(2), new Date(),"Bolnav");
-//       // appointmentDAO.createAppointment(app1);
-////        System.out.println(" vine " + app1.getPet() + " la control la " + " " + app1.getVet() + " la data de "+ app1.getDate());
+//        //Pet petUpdate = petDAO.readPet(2);
+//        //petUpdate.setName("Barky");
+//        //petDAO.updatePet(petUpdate);
 //
-////        petDAO.delete(petDAO.readPetById(1));
-//
-////          Pet petUpdate = petDAO.readPetById(2);
-// //         petUpdate.setName("Lara");
-////          petDAO.updatePet(petUpdate);
-//
+//        //petDAO.displayAll();
 //
 //        System.out.println("afisam peturile ");
 //        List<Pet> list = petDAO.displayAll();
-//        for(Pet pet : list){
-//            System.out.println( pet.toString());
-//        }
+//        for(Pet pet : list)
+//            System.out.println(pet.toString());
 
-
-        System.out.println("Start programm...");
+        System.out.println("Welcome to the Pet-Clinic!\n" + "Please choose one of the following options:");
         String start;
 
-        System.out.println("Alegeti litera pentru optiunea dorita :");
-        System.out.println("A - Adauga un pet");
-        System.out.println("B - Adauga un veterinar");
-        System.out.println("C - Adauga un owner");
-        System.out.println("D - Pune o programare");
-        System.out.println("E - Arata Animalele din baza de date");
+        while (true){
 
-
-        while (true) {
+            System.out.println("0 - End session");
+            System.out.println("1 - Register a veterinary");
+            System.out.println("2 - Display all veterinaries");
+            System.out.println("3 - Register a pet owner");
+            System.out.println("4 - Display all pet owners");
+            System.out.println("5 - Register a pet");
+            System.out.println("6 - Display all pet");
+            System.out.println("7 - Add an appointment");
+            System.out.println("8 - Delete owner");
+            System.out.println("9 - Update pet");
+            System.out.println("10 - Display owner by phone");
 
             start = scanner.nextLine();
 
-            if ("exit".equals(start)) {
+            if ("0".equals(start)) {
                 break;
             }
 
+            switch (start) {
 
-            switch (start.toLowerCase()) {
-
-                    case "a":
-                    adaugaPet();
+                case "1":
+                    registerVeterinary();
                     break;
-
-                    case "b":
-                    adaugaVet();
+                case "2":
+                    displayVeterinaries();
                     break;
-
-                    case "c":
-                    adaugaApp();
+                case "3":
+                    registerOwner();
                     break;
-
-                    case "d":
-                    adaugaStapan();
+                case "4":
+                    displayOwners();
                     break;
-
-                    case "e":
-                        arataAnimale();
-                        break;
+                case "5":
+                    registerPet();
+                    break;
+                case "6":
+                    displayPets();
+                    break;
+                case "7":
+                    addAppointment();
+                    break;
+                case "8":
+                    deleteOwner();
+                    break;
+                case "9":
+                    updatePet();
+                    break;
+                case "10":
+                    displayOwnerByPhone();
+                    break;
                 default :
-                        System.out.println("Comanda nu este in lista");
+                    System.out.println("Unkown command.");
 
 
             }
 
-
         }
     }
 
-       static public void adaugaPet () {
-            String text;
-            System.out.println("Introduceti detaliile Pet-ului: ");
-            System.out.println("Specie ");
-            String specie = scanner.nextLine();
-            System.out.println("Breed ");
-            String breed = scanner.nextLine();
-            System.out.println("Name ");
-            String name = scanner.nextLine();
-            System.out.println("Varsta ");
-            int varsta = scanner.nextInt();
-            System.out.println("Greutata ");
-            double greutate = scanner.nextDouble();
-            System.out.println("Id Stapan: ");
-            int id = scanner.nextInt();
-            Owner stapan = ownerDAO.readOwnerById(id);
 
-            Pet pet1 = new Pet(specie, breed, name, varsta, greutate, stapan, new HashSet<>());
-            petDAO.createPet(pet1);
+    static public void registerVeterinary (){
 
-        }
-
-    static public void adaugaVet () {
-        String text;
-        System.out.println("Introduceti detaliile Vet-ului: ");
-        System.out.println("Name ");
+        System.out.println("Register veterinary name: ");
         String name = scanner.nextLine();
-        System.out.println("Telefon ");
-        String telefon = scanner.nextLine();
-        System.out.println("Mail ");
+        System.out.println("Phone: ");
+        String phone = scanner.nextLine();
+        System.out.println("Mail: ");
         String mail = scanner.nextLine();
         System.out.println("Speciality ");
-        String specialitate = scanner.nextLine();
+        String speciality = scanner.nextLine();
 
-
-        Veterinary vet1 = new Veterinary(name, telefon, mail, specialitate, new HashSet<>());
-        veterinaryDAO.createVeterinary(vet1);
-
+        Veterinary veterinary1 = new Veterinary(name, phone, mail, speciality, new HashSet<>());
+        veterinaryDAO.createVeterinary(veterinary1);
     }
 
-
-    static public void adaugaApp () {
-        String text;
-        System.out.println("Introduceti detaliile Programarii: ");
-        System.out.println("Id Pet ");
-        int idPet = scanner.nextInt();
-        Pet pet = petDAO.readPetById(idPet);
-        System.out.println("Id Vet ");
-        int idVet = scanner.nextInt();
-        Veterinary vet = veterinaryDAO.readVeterinary(idVet);
-        Date data = new Date();
-        System.out.println("Motiv ");
-        String motive = scanner.nextLine();
-
-
-        Appointment app1 = new Appointment(pet, vet, data, motive);
-        appointmentDAO.createAppointment(app1);
-
+    static public void displayVeterinaries(){
+        List<Veterinary> list = veterinaryDAO.displayAll();
+        for(Veterinary veterinary : list){
+            System.out.println(veterinary.toString());
+        }
     }
 
-    static public void adaugaStapan () {
-        String text;
-        System.out.println("Introduceti detaliile Stapanului: ");
-        System.out.println("Name ");
+    static public void registerOwner (){
+
+        System.out.println("Register owner name: ");
         String name = scanner.nextLine();
-        System.out.println("Telefon ");
-        String telefon = scanner.nextLine();
-        System.out.println("Mail ");
+        System.out.println("Phone: ");
+        String phone = scanner.nextLine();
+        System.out.println("Mail: ");
         String mail = scanner.nextLine();
-        System.out.println("Adresa ");
-        String adresa = scanner.nextLine();
+        System.out.println("Address: ");
+        String address = scanner.nextLine();
 
+        Owner owner1 = new Owner(name, phone, mail, address, new HashSet<>());
+        ownerDAO.createOwner(owner1);
+    }
 
-        Owner stapan = new Owner(name, telefon, mail, adresa, new HashSet<>());
-       ownerDAO.createOwner(stapan);
+    static public void displayOwners(){
+        List<Owner> list = ownerDAO.displayAll();
+        for(Owner owner : list){
+            System.out.println(owner.toString());
+        }
+    }
+
+    static public void registerPet (){
+
+        System.out.println("Register pet species: ");
+        String species = scanner.nextLine();
+        System.out.println("Breed: ");
+        String breed = scanner.nextLine();
+        System.out.println("Name: ");
+        String name = scanner.nextLine();
+        System.out.println("Age: ");
+        int age = scanner.nextInt();
+        System.out.println("Weight: ");
+        double weight = scanner.nextDouble();
+        System.out.println("Owner Id: ");
+        int id = scanner.nextInt();
+        Owner owner1 = ownerDAO.readOwnerById(id);
+
+        Pet pet1 = new Pet(species, breed, name, age, weight, owner1, new HashSet<>());
+        petDAO.createPet(pet1);
 
     }
 
-    static public void arataAnimale(){
-
-
+    static public void displayPets(){
         List<Pet> list = petDAO.displayAll();
         for(Pet pet : list){
             System.out.println( pet.toString());
         }
+    }
+
+    static public void addAppointment (){
+
+        Date date = new Date();
+        System.out.println("ReasonNEW: ");
+        String reason1 = scanner.nextLine();
+        System.out.println("Add pet Id: ");
+        int idPet = scanner.nextInt();
+        Pet pet = petDAO.readPetById(idPet);
+        System.out.println("Vet Id: ");
+        int idVet = scanner.nextInt();
+        Veterinary veterinary1 = veterinaryDAO.readVeterinary(idVet);
+
+        System.out.println("Thank you ");
+
+        Appointment app1 = new Appointment(pet,veterinary1,date,reason1);
+        appointmentDAO.createAppointment(app1);
 
     }
 
+    public static void deleteOwner(){
+        System.out.println("Delete the following Owner Id: ");
+        int idOwner = scanner.nextInt();
+        ownerDAO.delete(ownerDAO.readOwnerById(idOwner));
+    }
+
+
+    public static void displayOwnerByPhone(){
+
+        System.out.println("Display the following Owner Phone: ");
+        String phone = scanner.nextLine();
+        List<Owner> list = ownerDAO.displayOwnerByPhone(phone);
+        for(Owner owner : list){
+            System.out.println(owner.toString());
+        }
+
+    }
+
+    public static void updatePet(){
+        System.out.println("Update the following Pet Id: ");
+        int idPet = scanner.nextInt();
+        Pet petUpdated = petDAO.readPetById(idPet);
+        System.out.println("Current parameters: ");
+        System.out.println(petUpdated.toString());
+        System.out.println("New age: ");
+        int newAge = scanner.nextInt();
+        System.out.println("New weight: ");
+        double newWeight = scanner.nextDouble();
+        petUpdated.setAge(newAge);
+        petUpdated.setWeight(newWeight);
+        petDAO.updatePet(petUpdated);
+    }
+
 }
-
-
-
-///// stergere la toate si update
